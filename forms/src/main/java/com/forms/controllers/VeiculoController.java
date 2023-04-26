@@ -69,4 +69,10 @@ public class VeiculoController implements Initializable{
         txt_licensePlate.clear();
         txt_fabricationYear.clear();
     }    
+
+    @FXML
+    void goMenu(ActionEvent event) {
+        MainController mc = new MainController();
+        mc.changeToMenu();
+    }
 }

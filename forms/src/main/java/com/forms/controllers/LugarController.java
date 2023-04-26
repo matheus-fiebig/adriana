@@ -48,4 +48,10 @@ public class LugarController {
         txt_description.clear();
         txt_state.clear();
     }
+
+    @FXML
+    void goMenu(ActionEvent event) {
+        MainController mc = new MainController();
+        mc.changeToMenu();
+    }
 }

@@ -31,6 +31,11 @@ public class MainController {
         changeScene("../views/veiculo.fxml");
     }
 
+
+    void changeToMenu() {
+        changeScene("../views/main.fxml");
+    }
+
     private void changeScene(String fxml) {
         Parent scene;
         try {

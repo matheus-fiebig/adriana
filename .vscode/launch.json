@@ -16,7 +16,7 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "main.java.com.forms.App",
-            "projectName": "com.forms",
+            "projectName": "com.forms.App",
             "vmArgs": "--module-path 'C:/Java/javafx-sdk-20/lib' --add-modules=javafx.swing,javafx.graphics,javafx.fxml,javafx.media,javafx.web"
         }
     ]

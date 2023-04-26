@@ -59,4 +59,10 @@ public class PessoaController implements Initializable {
         txt_firstName.clear();
         txt_lastName.clear();
     }
+
+    @FXML
+    void goMenu(ActionEvent event) {
+        MainController mc = new MainController();
+        mc.changeToMenu();
+    }
 }
