@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+
+import com.forms.dao.LugarDAO;
+import com.forms.factory.JdbcConnectionFactory;
 import com.forms.models.Lugar;
 import com.forms.utils.CustomAlert;
 
@@ -15,7 +18,13 @@ public class LugarController {
     @FXML private TextField txt_description;
     @FXML private TextField txt_state;
 
-    private ArrayList<Lugar> places = new ArrayList<Lugar>();
+    private LugarDAO lugarDAO;
+
+    public LugarController() {
+        super();
+        var conn = new JdbcConnectionFactory().recuperarConexao();
+        lugarDAO = new LugarDAO(conn);
+    }
 
     @FXML
     void save(ActionEvent event) {
@@ -31,13 +40,13 @@ public class LugarController {
         }
         
         CustomAlert.showSuccess("Cadastrado com sucesso");
-        places.add(place);
+        lugarDAO.insertLugar(place);
         reset();
     }
 
     @FXML
     void show(ActionEvent event) {
-        for (Lugar lugar : places) {
+        for (Lugar lugar : lugarDAO.getLugares()) {
             CustomAlert.showInformation(lugar.toString());
         }
     }

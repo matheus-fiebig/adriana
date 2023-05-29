@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.forms.dao.VeiculoDAO;
+import com.forms.factory.JdbcConnectionFactory;
 import com.forms.models.Veiculo;
 import com.forms.utils.CustomAlert;
 
@@ -21,7 +23,13 @@ public class VeiculoController implements Initializable{
     @FXML private TextField txt_licensePlate;
     @FXML private TextField txt_model;
 
-    private ArrayList<Veiculo> vehicles = new ArrayList<Veiculo>();
+    private VeiculoDAO veiculoDAO;
+
+    public VeiculoController() {
+        super();
+        var conn = new JdbcConnectionFactory().recuperarConexao();
+        veiculoDAO = new VeiculoDAO(conn);
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -43,7 +51,7 @@ public class VeiculoController implements Initializable{
         }
         
         CustomAlert.showSuccess("Cadastrado com sucesso");
-        vehicles.add(vehicle);
+        veiculoDAO.insertVeiculo(vehicle);
         reset();
     }
 
@@ -57,7 +65,7 @@ public class VeiculoController implements Initializable{
 
     @FXML
     void show(ActionEvent event) {
-        for (Veiculo vehicle : vehicles) {
+        for (Veiculo vehicle : veiculoDAO.getVeiculos()) {
             CustomAlert.showInformation(vehicle.toString());
         }
     }

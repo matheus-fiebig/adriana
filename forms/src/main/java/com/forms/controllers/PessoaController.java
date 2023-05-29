@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.forms.dao.PessoaDAO;
+import com.forms.factory.JdbcConnectionFactory;
 import com.forms.models.Pessoa;
 import com.forms.utils.CustomAlert;
 
@@ -21,7 +23,14 @@ public class PessoaController implements Initializable {
     @FXML private TextField txt_firstName;
     @FXML private TextField txt_lastName;
 
-    private ArrayList<Pessoa> people = new ArrayList<Pessoa>();
+    private PessoaDAO pessoaDAO;
+
+    public PessoaController() {
+        super();
+        var conn = new JdbcConnectionFactory();
+        pessoaDAO = new PessoaDAO(conn.recuperarConexao());
+    }
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -42,13 +51,13 @@ public class PessoaController implements Initializable {
         }
         
         CustomAlert.showSuccess("Cadastrado com sucesso");
-        people.add(person);
+        pessoaDAO.insertPessoa(person);
         reset();
     }
 
     @FXML
     void show(ActionEvent event) {
-        for (Pessoa pessoa : people) {
+        for (Pessoa pessoa : pessoaDAO.getPessoas()) {
             CustomAlert.showInformation(pessoa.toString());
         }
     }
