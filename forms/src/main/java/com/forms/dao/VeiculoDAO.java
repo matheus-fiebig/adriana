@@ -10,16 +10,30 @@ import com.forms.models.Veiculo;
 
 import javafx.scene.paint.Color;
 
+
 public class VeiculoDAO extends BaseDAO {
     
     public VeiculoDAO(Connection connection) {
         super(connection);
     }
 
+    public static int[] getRGB(final String rgb)
+    {
+        final int[] ret = new int[3];
+        for (int i = 0; i < 3; i++)
+        {
+            ret[i] = Integer.parseInt(rgb.substring(i * 2, i * 2 + 2), 16);
+        }
+        return ret;
+    }
+
     public ArrayList<Veiculo> getVeiculos(){
-        return super.executarQuery("select * from Pessoa", x -> {
+        return super.executarQuery("select * from Veiculo", x -> {
             try {
-                return new Veiculo(Color.valueOf(x.getString("color")), 
+                var t = x.getString("color");
+                var color = getRGB(t.substring(1, t.length())) ;
+
+                return new Veiculo( Color.rgb(color[0], color[1], color[2], 1) , 
                 x.getInt("fabricationYear"),
                 x.getString("brand"),
                 x.getString("model"),
@@ -31,8 +45,12 @@ public class VeiculoDAO extends BaseDAO {
     }
 
     public void insertVeiculo(Veiculo v){
-        String sql = "insert into Pessoa values(color, brand, frabicationYear, licensePlate, model) "+
-                     "values ('"+v.getColor()+"','"+v.getBrand()+"',"+v.getFabricationYear()+",'"+v.getLicensePlate()+"', '"+v.getModel()+"')";
+        var colorHex = String.format( "#%02X%02X%02X",
+            (int)( v.getColor().getRed() * 255 ),
+            (int)( v.getColor().getGreen() * 255 ),
+            (int)( v.getColor().getBlue() * 255 ) );
+        String sql = "insert into Veiculo(color, brand, fabricationYear, licensePlate, model) "+
+                     "values ('"+colorHex+"','"+v.getBrand()+"',"+v.getFabricationYear()+",'"+v.getLicensePlate()+"', '"+v.getModel()+"')";
         super.executeScalar(sql);
     }
 }

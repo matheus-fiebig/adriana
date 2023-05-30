@@ -27,7 +27,7 @@ public class LugarDAO extends BaseDAO {
     }
 
     public void insertLugar(Lugar l){
-        String sql = "insert into Lugar values(city, country, description, state) "+
+        String sql = "insert into Lugar(city, country, description, state) "+
                      "values ('"+l.getCity()+"','"+l.getCountry()+"','"+l.getDescription()+"','"+l.getState()+"')";
         super.executeScalar(sql);
     }

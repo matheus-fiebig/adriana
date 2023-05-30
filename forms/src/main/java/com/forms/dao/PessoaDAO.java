@@ -2,6 +2,7 @@ package com.forms.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class PessoaDAO extends BaseDAO {
                 return new Pessoa(
                     x.getString("first_Name"), 
                     x.getString("last_Name"), 
-                    LocalDateTime.parse(birthDate, formatter).toLocalDate(),
+                    LocalDate.parse(birthDate, formatter),
                     x.getString("cpf"));
             } catch (SQLException e) {
                 return null;
@@ -32,7 +33,7 @@ public class PessoaDAO extends BaseDAO {
     }
 
     public void insertPessoa(Pessoa p){
-        String sql = "insert into Pessoa values(cpf, first_Name, last_Name, birthDate) "+
+        String sql = "insert into Pessoa(cpf, first_Name, last_Name, birthDate) "+
                      "values ('"+p.getCpf()+"','"+p.getFirstName()+"','"+p.getLastName()+"','"+p.getBirthDate()+"')";
         super.executeScalar(sql);
     }
