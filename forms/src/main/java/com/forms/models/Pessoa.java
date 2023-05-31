@@ -11,15 +11,26 @@ public class Pessoa {
 
     private String cpf;
 
+    private Integer id;
+
     public Pessoa() {
         super();
     }
 
-    public Pessoa(String firstName, String lastName, LocalDate birthDate, String cpf) {
+    public Pessoa(String firstName, String lastName, LocalDate birthDate, String cpf, Integer id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.cpf = cpf;
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {

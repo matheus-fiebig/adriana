@@ -9,14 +9,25 @@ public class Lugar {
     
     private String description;
 
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Lugar() {
     }
 
-    public Lugar(String country, String city, String state, String description) {
+    public Lugar(String country, String city, String state, String description, Integer id) {
         this.country = country;
         this.city = city;
         this.state = state;
         this.description = description;
+        this.id = id;
     }
 
     public String getCountry() {

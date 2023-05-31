@@ -13,15 +13,26 @@ public class Veiculo {
     
     private String licensePlate;
 
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public Veiculo() {
     }
 
-    public Veiculo(Color color, int fabricationYear, String brand, String model, String licensePlate) {
+    public Veiculo(Color color, int fabricationYear, String brand, String model, String licensePlate, Integer id) {
         this.color = color;
         this.fabricationYear = fabricationYear;
         this.brand = brand;
         this.model = model;
         this.licensePlate = licensePlate;
+        this.id = id;
     }
 
     public Color getColor() {

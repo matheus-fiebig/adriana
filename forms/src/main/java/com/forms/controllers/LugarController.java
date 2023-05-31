@@ -17,6 +17,7 @@ public class LugarController {
     @FXML private TextField txt_country;
     @FXML private TextField txt_description;
     @FXML private TextField txt_state;
+    private Integer hiddenId = 0;
 
     private LugarDAO lugarDAO;
 
@@ -32,7 +33,8 @@ public class LugarController {
             txt_country.getText(), 
             txt_city.getText(), 
             txt_state.getText(), 
-            txt_description.getText());
+            txt_description.getText(),
+            hiddenId);
 
         if(!place.isValid()){
             CustomAlert.showError("Preencha todos os campos");
@@ -40,7 +42,9 @@ public class LugarController {
         }
         
         CustomAlert.showSuccess("Cadastrado com sucesso");
-        lugarDAO.insertLugar(place);
+        if(hiddenId == 0) lugarDAO.insertLugar(place);
+        else lugarDAO.updateLugar(place);
+        
         reset();
     }
 
@@ -50,12 +54,29 @@ public class LugarController {
             CustomAlert.showInformation(lugar.toString());
         }
     }
+    
+    @FXML
+    void updateLast(ActionEvent event){
+        var lugar = lugarDAO.getLugares().stream().findFirst().get();
+
+        hiddenId = lugar.getId();
+        txt_city.setText(lugar.getCity());
+        txt_country.setText(lugar.getCountry());
+        txt_description.setText(lugar.getDescription());
+        txt_state.setText(lugar.getState());
+    }
+
+    @FXML
+    void deleteAll(ActionEvent event){
+        lugarDAO.deleteAll();
+    }
 
     private void reset(){
         txt_city.clear();
         txt_country.clear();
         txt_description.clear();
         txt_state.clear();
+        hiddenId = 0;
     }
 
     @FXML

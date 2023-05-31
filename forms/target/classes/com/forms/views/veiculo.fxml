@@ -56,7 +56,9 @@
             <TextField fx:id="txt_licensePlate" layoutX="450.0" layoutY="46.0" prefHeight="36.0" prefWidth="176.0" promptText="Placa" styleClass="input-text" />
             <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#show" styleClass="btn" text="Ver Cadastrados" />
             <ColorPicker fx:id="field_colorPicker" layoutX="14.0" layoutY="123.0" prefHeight="36.0" prefWidth="299.0" styleClass="input-text" />
-            <Button layoutX="283.0" layoutY="255.0" minWidth="75.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="45.0" prefWidth="75.0" styleClass="btn-nr" text="Voltar" />
+            <Button layoutX="14.0" layoutY="330.0" minWidth="75.0" mnemonicParsing="false" onAction="#updateLast" prefHeight="45.0" prefWidth="208.0" styleClass="btn-nr" text="Atualizar Ultimo" />
+            <Button layoutX="412.0" layoutY="330.0" minWidth="75.0" mnemonicParsing="false" onAction="#deleteAll" prefHeight="45.0" prefWidth="208.0" styleClass="btn-nr" text="Deletar Todos" />
+            <Button layoutX="263.0" layoutY="300.0" minWidth="75.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="45.0" prefWidth="129.0" styleClass="btn-nr" text="Voltar" />
       </children>
     </AnchorPane>
   </children>

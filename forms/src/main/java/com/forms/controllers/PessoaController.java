@@ -22,6 +22,7 @@ public class PessoaController implements Initializable {
     @FXML private TextField txt_cpf;
     @FXML private TextField txt_firstName;
     @FXML private TextField txt_lastName;
+    private Integer hiddenId = 0;
 
     private PessoaDAO pessoaDAO;
 
@@ -43,7 +44,8 @@ public class PessoaController implements Initializable {
             txt_firstName.getText(), 
             txt_lastName.getText(), 
             txt_birthDate.getValue(), 
-            txt_cpf.getText());
+            txt_cpf.getText(),
+            hiddenId);
 
         if(!person.isValid()){
             CustomAlert.showError("Preencha todos os campos");
@@ -51,7 +53,11 @@ public class PessoaController implements Initializable {
         }
         
         CustomAlert.showSuccess("Cadastrado com sucesso");
-        pessoaDAO.insertPessoa(person);
+        if(hiddenId == 0) 
+            pessoaDAO.insertPessoa(person);
+        else
+            pessoaDAO.updatePessoa(person);;
+
         reset();
     }
 
@@ -67,6 +73,23 @@ public class PessoaController implements Initializable {
         txt_cpf.clear();
         txt_firstName.clear();
         txt_lastName.clear();
+        hiddenId = 0;
+    }
+
+    @FXML
+    void deleteAll(ActionEvent event){
+        pessoaDAO.deleteAll();
+    }
+
+    @FXML
+    void updateLast(ActionEvent event){
+        var pessoa = pessoaDAO.getPessoas().stream().findFirst().get();
+
+        hiddenId = pessoa.getId();
+        txt_birthDate.setValue(pessoa.getBirthDate());
+        txt_cpf.setText(pessoa.getCpf());
+        txt_firstName.setText(pessoa.getFirstName());
+        txt_lastName.setText(pessoa.getLastName());
     }
 
     @FXML

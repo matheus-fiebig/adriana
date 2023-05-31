@@ -52,10 +52,12 @@
             <TextField fx:id="txt_firstName" layoutX="14.0" layoutY="52.0" prefHeight="36.0" prefWidth="293.0" promptText="Primeiro Nome" styleClass="input-text" />
             <TextField fx:id="txt_lastName" layoutX="333.0" layoutY="52.0" prefHeight="36.0" prefWidth="293.0" promptText="Ultimo nome" styleClass="input-text" />
             <TextField fx:id="txt_cpf" layoutX="333.0" layoutY="103.0" prefHeight="36.0" prefWidth="293.0" promptText="CPF" styleClass="input-text" />
-            <Button layoutX="408.0" layoutY="255.0" mnemonicParsing="false" onAction="#save" styleClass="btn" text="Cadastrar" />
+            <Button layoutX="408.0" layoutY="255.0" mnemonicParsing="false" onAction="#save" styleClass="btn" text="Salvar" />
             <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#show" styleClass="btn" text="Ver Cadastrados" />
             <DatePicker fx:id="txt_birthDate" layoutX="15.0" layoutY="103.0" prefHeight="36.0" prefWidth="293.0" styleClass="input-text" />
-            <Button layoutX="270.0" layoutY="255.0" minWidth="75.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="45.0" prefWidth="75.0" styleClass="btn-nr" text="Voltar" />
+            <Button layoutX="14.0" layoutY="341.0" minWidth="75.0" mnemonicParsing="false" onAction="#updateLast" prefHeight="45.0" prefWidth="208.0" styleClass="btn-nr" text="Atualizar Ultimo" />
+            <Button layoutX="408.0" layoutY="341.0" minWidth="75.0" mnemonicParsing="false" onAction="#deleteAll" prefHeight="45.0" prefWidth="208.0" styleClass="btn-nr" text="Deletar Todos" />
+            <Button layoutX="242.0" layoutY="300.0" minWidth="75.0" mnemonicParsing="false" onAction="#goMenu" prefHeight="45.0" prefWidth="132.0" styleClass="btn-nr" text="Voltar" />
       </children>
     </AnchorPane>
   </children>

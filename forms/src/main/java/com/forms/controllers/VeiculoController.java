@@ -22,6 +22,7 @@ public class VeiculoController implements Initializable{
     @FXML private TextField txt_fabricationYear;
     @FXML private TextField txt_licensePlate;
     @FXML private TextField txt_model;
+    private int hiddenId = 0;
 
     private VeiculoDAO veiculoDAO;
 
@@ -43,7 +44,8 @@ public class VeiculoController implements Initializable{
             tryParseInt(),
             txt_brand.getText(), 
             txt_model.getText(),
-            txt_licensePlate.getText());
+            txt_licensePlate.getText(),
+            hiddenId);
 
         if(!vehicle.isValid()){
             CustomAlert.showError("Preencha todos os campos");
@@ -51,7 +53,9 @@ public class VeiculoController implements Initializable{
         }
         
         CustomAlert.showSuccess("Cadastrado com sucesso");
-        veiculoDAO.insertVeiculo(vehicle);
+        if(hiddenId == 0) veiculoDAO.insertVeiculo(vehicle);
+        else veiculoDAO.updateVeiculo(vehicle);
+        
         reset();
     }
 
@@ -61,6 +65,24 @@ public class VeiculoController implements Initializable{
         } catch(Exception e){
             return 0;
         }
+    }
+
+
+    @FXML
+    void updateLast(ActionEvent event){
+        var v = veiculoDAO.getVeiculos().stream().findFirst().get();
+
+        txt_brand.setText(v.getBrand());
+        txt_fabricationYear.setText(v.getFabricationYear() + "");
+        txt_licensePlate.setText(v.getLicensePlate());
+        txt_model.setText(v.getModel());
+        field_colorPicker.setValue(v.getColor());
+        hiddenId = v.getId();
+    }
+
+    @FXML
+    void deleteAll(ActionEvent event){
+        veiculoDAO.deleteAll();
     }
 
     @FXML
@@ -76,6 +98,7 @@ public class VeiculoController implements Initializable{
         txt_brand.clear();
         txt_licensePlate.clear();
         txt_fabricationYear.clear();
+        hiddenId = 0;
     }    
 
     @FXML

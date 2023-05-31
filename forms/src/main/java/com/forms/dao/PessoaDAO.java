@@ -25,7 +25,8 @@ public class PessoaDAO extends BaseDAO {
                     x.getString("first_Name"), 
                     x.getString("last_Name"), 
                     LocalDate.parse(birthDate, formatter),
-                    x.getString("cpf"));
+                    x.getString("cpf"),
+                    x.getInt("id"));
             } catch (SQLException e) {
                 return null;
             }
@@ -35,6 +36,20 @@ public class PessoaDAO extends BaseDAO {
     public void insertPessoa(Pessoa p){
         String sql = "insert into Pessoa(cpf, first_Name, last_Name, birthDate) "+
                      "values ('"+p.getCpf()+"','"+p.getFirstName()+"','"+p.getLastName()+"','"+p.getBirthDate()+"')";
+        super.executeScalar(sql);
+    }
+
+    public void deleteAll(){
+        String sql = "delete from Pessoa where id > 0";
+        executeScalar(sql);
+    }
+    
+    public void updatePessoa(Pessoa p){
+        String sql = "update Pessoa set cpf = '"+p.getCpf()+
+                     "', first_Name = '"+p.getFirstName()+
+                     "', last_Name='"+p.getLastName()+
+                     "', birthDate='"+p.getBirthDate()+
+                     "' where Id = " + p.getId();
         super.executeScalar(sql);
     }
 }

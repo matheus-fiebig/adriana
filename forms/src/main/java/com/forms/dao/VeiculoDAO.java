@@ -37,7 +37,8 @@ public class VeiculoDAO extends BaseDAO {
                 x.getInt("fabricationYear"),
                 x.getString("brand"),
                 x.getString("model"),
-                x.getString("licensePlate"));
+                x.getString("licensePlate"),
+                x.getInt("id"));
             } catch (SQLException e) {
                 return null;
             }
@@ -51,6 +52,25 @@ public class VeiculoDAO extends BaseDAO {
             (int)( v.getColor().getBlue() * 255 ) );
         String sql = "insert into Veiculo(color, brand, fabricationYear, licensePlate, model) "+
                      "values ('"+colorHex+"','"+v.getBrand()+"',"+v.getFabricationYear()+",'"+v.getLicensePlate()+"', '"+v.getModel()+"')";
+        super.executeScalar(sql);
+    }
+
+    public void deleteAll(){
+        String sql = "delete from Veiculo where id > 0";
+        executeScalar(sql);
+    }
+
+    public void updateVeiculo(Veiculo v) {
+        var colorHex = String.format( "#%02X%02X%02X",
+                        (int)( v.getColor().getRed() * 255 ),
+                        (int)( v.getColor().getGreen() * 255 ),
+                        (int)( v.getColor().getBlue() * 255 ) );
+        String sql = "update Veiculo set Brand = '"+v.getBrand()+
+                "', FabricationYear = '"+v.getFabricationYear()+
+                "', LicensePlate='"+v.getLicensePlate()+
+                "', Model='"+v.getModel()+
+                "', Color='"+colorHex+
+                "' where Id = " + v.getId();
         super.executeScalar(sql);
     }
 }

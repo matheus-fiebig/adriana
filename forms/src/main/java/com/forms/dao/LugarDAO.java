@@ -19,7 +19,8 @@ public class LugarDAO extends BaseDAO {
                     x.getString("country"), 
                     x.getString("city"), 
                     x.getString("state"), 
-                    x.getString("description"));
+                    x.getString("description"),
+                    x.getInt("id"));
             } catch (SQLException e) {
                 return null;
             }
@@ -30,5 +31,19 @@ public class LugarDAO extends BaseDAO {
         String sql = "insert into Lugar(city, country, description, state) "+
                      "values ('"+l.getCity()+"','"+l.getCountry()+"','"+l.getDescription()+"','"+l.getState()+"')";
         super.executeScalar(sql);
+    }
+
+    public void updateLugar(Lugar l){
+        String sql = "update Lugar set City = '"+l.getCity()+
+                     "', Country = '"+l.getCountry()+
+                     "', Description='"+l.getDescription()+
+                     "', State='"+l.getState()+
+                     "' where Id = " + l.getId();
+        super.executeScalar(sql);
+    }
+
+    public void deleteAll(){
+        String sql = "delete from Lugar where id > 0";
+        executeScalar(sql);
     }
 }
